@@ -1,18 +1,8 @@
 var express = require('express');
 var http = require('http');
+var fortune = require('./lib/fortune');
 
 var app = express();
-
-// create fortunes
-
-var fortuneCookies = [
-    'conquer your fears, before they conquer you',
-    'rivers need springs',
-    'you will have a pleasant surprise',
-    'don\'t fear what you don\'t know',
-    'brace yourself: it\'s going to be that kind of day',
-    'keep it simple, smilely'
-];
 
 // set up handlebars view engine
 
@@ -33,8 +23,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/about', function(req, res) {
-        var randFortune = fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)]
-        res.render('about', {fortune: randFortune});
+        res.render('about', {fortune: fortune.getFortune()});
 });
 
 //custom 404 page
